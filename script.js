@@ -30,10 +30,13 @@ function initializeLoadingScreen() {
     setBackground();
     
     // Initialize music
-    if (Config.EnableMusic) {
+    if (Config.EnableMusic && Config.AudioURL) {
         initializeMusic();
     } else {
-        document.getElementById('music-toggle').style.display = 'none';
+        const toggle = document.getElementById('music-toggle');
+        if (toggle) toggle.style.display = 'none';
+        const mediaPlayer = document.getElementById('media-player');
+        if (mediaPlayer) mediaPlayer.style.display = 'none';
     }
     
     // Load staff
@@ -90,56 +93,91 @@ function setBackground() {
 }
 
 function initializeMusic() {
-    const musicContainer = document.getElementById('music-container');
     const playerDisplay = document.getElementById('player-display');
     const musicToggle = document.getElementById('music-toggle');
     const playerClose = document.getElementById('player-close');
-    
-    // Create hidden music iframe for autoplay
-    const hiddenIframe = document.createElement('iframe');
-    hiddenIframe.src = Config.MusicURL;
-    hiddenIframe.frameBorder = '0';
-    hiddenIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    hiddenIframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    hiddenIframe.allowFullscreen = true;
-    hiddenIframe.style.display = 'none';
-    hiddenIframe.style.width = '0';
-    hiddenIframe.style.height = '0';
-    musicContainer.appendChild(hiddenIframe);
-    
-    // Create visible media player using provided embed code parameters
-    const playerIframe = document.createElement('iframe');
-    playerIframe.src = Config.MusicURL;
-    playerIframe.frameBorder = '0';
-    playerIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    playerIframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    playerIframe.allowFullscreen = true;
-    playerIframe.style.width = '100%';
-    playerIframe.style.height = '100%';
-    playerIframe.style.borderRadius = '10px';
-    playerDisplay.appendChild(playerIframe);
-    
-    let isMuted = false;
-    
-    // Toggle music mute
-    musicToggle.addEventListener('click', function() {
-        isMuted = !isMuted;
-        
-        if (isMuted) {
-            musicToggle.classList.add('muted');
-            musicToggle.innerHTML = '<i class="fas fa-volume-xmark"></i>';
-            playerDisplay.style.opacity = '0.5';
+
+    // Build audio element
+    const audio = new Audio(Config.AudioURL);
+    audio.loop = true;
+    audio.volume = Config.MusicVolume ?? 0.3;
+    audio.autoplay = true;
+
+    // Build simple controls UI
+    const controls = document.createElement('div');
+    controls.className = 'player-audio-controls';
+
+    const playPause = document.createElement('button');
+    playPause.className = 'player-btn';
+    playPause.title = 'Play/Pause';
+    playPause.innerHTML = '<i class="fas fa-pause"></i>';
+
+    const volumeWrap = document.createElement('div');
+    volumeWrap.className = 'player-volume';
+    const volumeIcon = document.createElement('i');
+    volumeIcon.className = 'fas fa-volume-up';
+    const volumeSlider = document.createElement('input');
+    volumeSlider.type = 'range';
+    volumeSlider.min = '0';
+    volumeSlider.max = '1';
+    volumeSlider.step = '0.01';
+    volumeSlider.value = audio.volume.toString();
+    volumeWrap.appendChild(volumeIcon);
+    volumeWrap.appendChild(volumeSlider);
+
+    controls.appendChild(playPause);
+    controls.appendChild(volumeWrap);
+
+    playerDisplay.innerHTML = '';
+    playerDisplay.appendChild(controls);
+
+    let isPaused = false;
+
+    playPause.addEventListener('click', () => {
+        if (isPaused) {
+            audio.play();
+            playPause.innerHTML = '<i class="fas fa-pause"></i>';
         } else {
-            musicToggle.classList.remove('muted');
-            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-            playerDisplay.style.opacity = '1';
+            audio.pause();
+            playPause.innerHTML = '<i class="fas fa-play"></i>';
+        }
+        isPaused = !isPaused;
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+        const value = parseFloat(e.target.value);
+        audio.volume = value;
+        if (value === 0) {
+            volumeIcon.className = 'fas fa-volume-mute';
+        } else if (value < 0.5) {
+            volumeIcon.className = 'fas fa-volume-down';
+        } else {
+            volumeIcon.className = 'fas fa-volume-up';
         }
     });
-    
+
+    // Toggle music via floating button (mute/unmute)
+    if (musicToggle) {
+        musicToggle.addEventListener('click', function() {
+            if (audio.muted) {
+                audio.muted = false;
+                musicToggle.classList.remove('muted');
+                musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                audio.muted = true;
+                musicToggle.classList.add('muted');
+                musicToggle.innerHTML = '<i class="fas fa-volume-xmark"></i>';
+            }
+        });
+    }
+
     // Close media player
-    playerClose.addEventListener('click', function() {
-        document.getElementById('media-player').style.display = 'none';
-    });
+    if (playerClose) {
+        playerClose.addEventListener('click', function() {
+            document.getElementById('media-player').style.display = 'none';
+            audio.pause();
+        });
+    }
 }
 
 function loadStaff() {

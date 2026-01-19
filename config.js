@@ -11,8 +11,8 @@ const Config = {
     BackgroundColor: "#1a1a2e",
     
     EnableMusic: true,
-    // Full embed src for the selected YouTube track (autoplay + loop) without extra tracking params
-    MusicURL: "https://www.youtube.com/embed/z6aONWHhTCU?autoplay=1&loop=1&playlist=z6aONWHhTCU&controls=0&modestbranding=1&rel=0&playsinline=1",
+    // Direct audio file (mp3/ogg). Replace with your own hosted audio URL.
+    AudioURL: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     MusicVolume: 0.3,
     
     Staff: [
