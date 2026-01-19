@@ -174,25 +174,6 @@ FiveM_Load/
 └── README.md          # This file
 ```
 
-## 🎥 YouTube Embed Tips
-
-### Getting the Correct URL Format
-
-1. Go to your YouTube video
-2. Extract the video ID (e.g., `dQw4w9WgXcQ` from `youtube.com/watch?v=dQw4w9WgXcQ`)
-3. Format as embed URL:
-   ```
-   https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&controls=0&showinfo=0
-   ```
-
-### Parameters Explained:
-- `autoplay=1` - Starts playing automatically
-- `mute=1` - Mutes the video (required for autoplay)
-- `loop=1` - Enables looping
-- `playlist=VIDEO_ID` - Required for loop to work
-- `controls=0` - Hides player controls
-- `showinfo=0` - Hides video information
-
 ## 🔧 Troubleshooting
 
 ### Music Not Playing
@@ -217,13 +198,6 @@ FiveM_Load/
 - ✅ Edit `config.js` and ensure the resource reloaded
 - ✅ Clear your browser cache (F5 or Ctrl+Shift+R)
 - ✅ Restart the FiveM server
-
-## 🌐 Browser Compatibility
-
-- ✅ Chrome/Edge - Full support
-- ✅ Firefox - Full support  
-- ✅ Safari - Full support (some autoplay restrictions may apply)
-- ✅ Opera - Full support
 
 ## 📱 Responsive Design
 
