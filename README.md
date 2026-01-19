@@ -1,13 +1,13 @@
 # FiveM Custom Loading Screen 🎮
 
-A modern, feature-rich, and fully customizable loading screen for your FiveM server. Impress your players with a beautiful loading experience featuring music, video backgrounds, staff display, social media integration, and server updates.
+A modern, feature-rich, and fully customizable loading screen for your FiveM server. Impress your players with a beautiful loading experience featuring direct-audio playback, video backgrounds, staff display, social media integration, and server updates.
 
 ![FiveM](https://img.shields.io/badge/FiveM-Compatible-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
 
-- 🎵 **Music Player** - Embed music from YouTube with mute/unmute controls
+- 🎵 **Music Player** - Direct audio (mp3/ogg) with play/pause, mute, and volume controls
 - 🎬 **Dynamic Backgrounds** - Support for video, image, or solid color backgrounds
 - 👥 **Staff Display** - Showcase your server team with avatars and roles
 - 🔗 **Social Media Links** - Discord, X (Twitter), Instagram, TikTok integration
@@ -56,7 +56,7 @@ const Config = {
     BackgroundImage: "Image_URL",
     BackgroundColor: "#1a1a2e",
     EnableMusic: true,
-    MusicURL: "YouTube_Embed_URL",
+    AudioURL: "https://your-domain.com/audio.mp3", // direct mp3/ogg
     // Staff, Social Media, Updates, and Theme settings...
 };
 ```
@@ -83,17 +83,19 @@ Config.BackgroundType = "color";
 Config.BackgroundColor = "#1a1a2e";
 ```
 
-### Adding Music
+### Adding Music (Direct Audio)
 
-1. Find a YouTube video with your desired music
-2. Get the video ID from the URL
-3. Format as an embed URL:
+1. Host or pick a direct audio file (mp3/ogg)
+2. Set the URL:
 ```javascript
 Config.EnableMusic = true;
-Config.MusicURL = "https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID&controls=0";
+Config.AudioURL = "https://your-domain.com/audio.mp3";
+Config.MusicVolume = 0.3; // 0.0 - 1.0
 ```
 
-**Note:** Include `&playlist=VIDEO_ID` for proper looping.
+Notes:
+- Use direct links only (no YouTube). CDN-hosted mp3/ogg is best.
+- The built-in player provides play/pause, mute, and volume.
 
 ### Managing Staff Members
 
@@ -194,10 +196,10 @@ FiveM_Load/
 ## 🔧 Troubleshooting
 
 ### Music Not Playing
-- ✅ Ensure the video is not region-restricted
-- ✅ Verify the video allows embedding
 - ✅ Check `Config.EnableMusic = true`
-- ✅ Try a different YouTube video
+- ✅ Confirm `Config.AudioURL` is a direct, publicly reachable mp3/ogg link
+- ✅ Verify CORS allows access to the audio file
+- ✅ Try another audio URL to rule out hosting issues
 
 ### Background Video Not Showing
 - ✅ Verify the YouTube URL format is correct
