@@ -98,31 +98,22 @@ function initializeMusic() {
     // Create hidden music iframe for autoplay
     const hiddenIframe = document.createElement('iframe');
     hiddenIframe.src = Config.MusicURL;
-    hiddenIframe.frameborder = '0';
+    hiddenIframe.frameBorder = '0';
     hiddenIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     hiddenIframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    hiddenIframe.allowFullscreen = true;
     hiddenIframe.style.display = 'none';
     hiddenIframe.style.width = '0';
     hiddenIframe.style.height = '0';
     musicContainer.appendChild(hiddenIframe);
     
-    // Create visible media player with controls enabled
-    // Replace controls=0 with controls=1 if it exists, otherwise add it
-    let playerUrl = Config.MusicURL;
-    if (playerUrl.includes('controls=0')) {
-        playerUrl = playerUrl.replace('controls=0', 'controls=1');
-    } else if (playerUrl.includes('controls=1')) {
-        // Already has controls=1, use as is
-    } else {
-        // No controls parameter, add it
-        playerUrl = playerUrl + (playerUrl.includes('?') ? '&' : '?') + 'controls=1';
-    }
-    
+    // Create visible media player using provided embed code parameters
     const playerIframe = document.createElement('iframe');
-    playerIframe.src = playerUrl;
-    playerIframe.frameborder = '0';
+    playerIframe.src = Config.MusicURL;
+    playerIframe.frameBorder = '0';
     playerIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     playerIframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    playerIframe.allowFullscreen = true;
     playerIframe.style.width = '100%';
     playerIframe.style.height = '100%';
     playerIframe.style.borderRadius = '10px';
