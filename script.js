@@ -96,8 +96,11 @@ function initializeMusic() {
     const iframe = document.createElement('iframe');
     iframe.src = Config.MusicURL;
     iframe.frameborder = '0';
-    iframe.allow = 'autoplay; encrypted-media';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
     iframe.style.display = 'none';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
     musicContainer.appendChild(iframe);
     
     let isMuted = false;
@@ -108,17 +111,31 @@ function initializeMusic() {
         if (isMuted) {
             musicToggle.classList.add('muted');
             musicToggle.innerHTML = '<i class="fas fa-volume-xmark"></i>';
-            // Try to mute the iframe (limited control over YouTube embeds)
+            // Mute by removing and recreating with mute parameter
             musicContainer.innerHTML = '';
+            const mutedIframe = document.createElement('iframe');
+            mutedIframe.src = Config.MusicURL + (Config.MusicURL.includes('?') ? '&' : '?') + 'mute=1';
+            mutedIframe.frameborder = '0';
+            mutedIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            mutedIframe.referrerPolicy = 'strict-origin-when-cross-origin';
+            mutedIframe.style.display = 'none';
+            mutedIframe.style.width = '0';
+            mutedIframe.style.height = '0';
+            musicContainer.appendChild(mutedIframe);
         } else {
             musicToggle.classList.remove('muted');
             musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-            // Recreate iframe
+            // Recreate iframe with sound
+            musicContainer.innerHTML = '';
             const newIframe = document.createElement('iframe');
             newIframe.src = Config.MusicURL;
             newIframe.frameborder = '0';
-            newIframe.allow = 'autoplay; encrypted-media';
+            newIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            newIframe.referrerPolicy = 'strict-origin-when-cross-origin';
             newIframe.style.display = 'none';
+            newIframe.style.width = '0';
+            newIframe.style.height = '0';
+            newIframe.appendChild(newIframe);
             musicContainer.appendChild(newIframe);
         }
     });
