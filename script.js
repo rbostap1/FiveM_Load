@@ -1,8 +1,8 @@
-// Convert Lua config to JavaScript
+// Ensure Config exists (fallback)
 function parseConfig() {
     const script = document.createElement('script');
     script.textContent = `
-        // This will be replaced by config.js
+        // Fallback: Config should be defined in config.js
         if (typeof Config === 'undefined') {
             Config = {};
         }
@@ -133,8 +133,10 @@ function loadStaff() {
         staffMember.className = 'staff-member';
         staffMember.innerHTML = `
             <img src="${staff.avatar}" alt="${staff.name}" class="staff-avatar">
-            <div class="staff-name">${staff.name}</div>
-            <div class="staff-role">${staff.role}</div>
+            <div class="staff-info">
+                <div class="staff-name">${staff.name}</div>
+                <div class="staff-role">${staff.role}</div>
+            </div>
         `;
         staffList.appendChild(staffMember);
     });

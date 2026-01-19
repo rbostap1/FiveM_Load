@@ -11,11 +11,11 @@ A modern, feature-rich, and fully customizable loading screen for your FiveM ser
 - 🎬 **Dynamic Backgrounds** - Support for video, image, or solid color backgrounds
 - 👥 **Staff Display** - Showcase your server team with avatars and roles
 - 🔗 **Social Media Links** - Discord, X (Twitter), Instagram, TikTok integration
-- 📢 **Updates System** - Display server announcements with detailed popup modals
+- 📢 **Announcements** - Scrollable list with detailed popup modals
 - 📖 **Rules Link** - Direct link to your server rules page
 - 🎨 **Modern UI/UX** - Beautiful animations, gradients, and smooth transitions
 - 📱 **Fully Responsive** - Works on all screen sizes
-- ⚙️ **100% Customizable** - Everything configurable via `config.lua` and `config.js`
+- ⚙️ **100% Customizable** - Everything configurable via `config.js`
 - 🎭 **Theme Support** - Custom color schemes
 
 ## 📸 Preview
@@ -27,7 +27,7 @@ The loading screen features:
 - Interactive cards with hover effects
 - Glass morphism design elements
 - Custom scrollbars
-- Modal popups for detailed updates
+- Modal popups for detailed announcements
 
 ## 🚀 Installation
 
@@ -42,54 +42,45 @@ The loading screen features:
 
 ## ⚙️ Configuration
 
-### Main Configuration Files
+### Configuration File
 
-#### `config.lua` (Server Configuration)
-Contains all the customizable settings:
+#### `config.js` (Single Source)
+All customizable settings for the loading screen live here:
 
-```lua
-Config = {}
-
--- Server Information
-Config.ServerName = "Your Awesome Server"
-Config.ServerLogo = "URL_to_your_logo"
-
--- Background Settings
-Config.BackgroundType = "video"  -- Options: "video", "image", "color"
-Config.BackgroundVideo = "YouTube_Embed_URL"
-Config.BackgroundImage = "Image_URL"
-Config.BackgroundColor = "#1a1a2e"
-
--- Music Settings
-Config.EnableMusic = true
-Config.MusicURL = "YouTube_Embed_URL"
-
--- Staff, Social Media, Updates, and Theme settings...
+```javascript
+const Config = {
+    ServerName: "Your Awesome Server",
+    ServerLogo: "URL_to_your_logo",
+    BackgroundType: "video", // "video", "image", or "color"
+    BackgroundVideo: "YouTube_Embed_URL",
+    BackgroundImage: "Image_URL",
+    BackgroundColor: "#1a1a2e",
+    EnableMusic: true,
+    MusicURL: "YouTube_Embed_URL",
+    // Staff, Social Media, Updates, and Theme settings...
+};
 ```
-
-#### `config.js` (Client Configuration)
-JavaScript version that mirrors `config.lua` - keep both synchronized.
 
 ## 🎨 Customization Guide
 
 ### Changing the Background
 
 **For Video Background:**
-```lua
-Config.BackgroundType = "video"
-Config.BackgroundVideo = "https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID"
+```javascript
+Config.BackgroundType = "video";
+Config.BackgroundVideo = "https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID";
 ```
 
 **For Image Background:**
-```lua
-Config.BackgroundType = "image"
-Config.BackgroundImage = "https://your-domain.com/background.jpg"
+```javascript
+Config.BackgroundType = "image";
+Config.BackgroundImage = "https://your-domain.com/background.jpg";
 ```
 
 **For Solid Color:**
-```lua
-Config.BackgroundType = "color"
-Config.BackgroundColor = "#1a1a2e"
+```javascript
+Config.BackgroundType = "color";
+Config.BackgroundColor = "#1a1a2e";
 ```
 
 ### Adding Music
@@ -97,53 +88,53 @@ Config.BackgroundColor = "#1a1a2e"
 1. Find a YouTube video with your desired music
 2. Get the video ID from the URL
 3. Format as an embed URL:
-```lua
-Config.EnableMusic = true
-Config.MusicURL = "https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID&controls=0"
+```javascript
+Config.EnableMusic = true;
+Config.MusicURL = "https://www.youtube.com/embed/VIDEO_ID?autoplay=1&loop=1&playlist=VIDEO_ID&controls=0";
 ```
 
 **Note:** Include `&playlist=VIDEO_ID` for proper looping.
 
 ### Managing Staff Members
 
-Add or modify staff in the `Config.Staff` table:
-```lua
-Config.Staff = {
+Add or modify staff in the `Config.Staff` array:
+```javascript
+Config.Staff = [
     {
-        name = "John Doe",
-        role = "Owner",
-        avatar = "https://avatar-url.com/image.png"
+        name: "John Doe",
+        role: "Owner",
+        avatar: "https://avatar-url.com/image.png",
     },
-    -- Add more staff members...
-}
+    // Add more staff members...
+];
 ```
 
 ### Social Media Links
 
 Customize your social links:
-```lua
-Config.SocialMedia = {
+```javascript
+Config.SocialMedia = [
     {
-        name = "Discord",
-        icon = "fab fa-discord",
-        url = "https://discord.gg/yourserver",
-        color = "#5865F2"
+        name: "Discord",
+        icon: "fab fa-discord",
+        url: "https://discord.gg/yourserver",
+        color: "#5865F2",
     },
-    -- Add more platforms...
-}
+    // Add more platforms...
+];
 ```
 
 **Supported Icons:** Uses Font Awesome 6.5.1 - check [Font Awesome](https://fontawesome.com/icons) for icon names.
 
-### Adding Updates/Announcements
+### Announcements
 
-```lua
-Config.Updates = {
+```javascript
+Config.Updates = [
     {
-        date = "January 2, 2026",
-        title = "Update Title",
-        description = "Short preview text",
-        details = [[
+        date: "January 2, 2026",
+        title: "Announcement Title",
+        description: "Short preview text",
+        details: `
             <h3>📋 Full Details</h3>
             <ul>
                 <li>Feature 1</li>
@@ -151,22 +142,22 @@ Config.Updates = {
                 <li>Bug fixes</li>
             </ul>
             <p>Additional information here...</p>
-        ]]
-    }
-}
+        `,
+    },
+];
 ```
 
 ### Customizing Theme Colors
 
-```lua
+```javascript
 Config.Theme = {
-    primary = "#6c5ce7",      -- Main accent color
-    secondary = "#a29bfe",    -- Secondary accents
-    accent = "#fd79a8",       -- Highlight color
-    background = "rgba(26, 26, 46, 0.95)",
-    text = "#ffffff",
-    textSecondary = "#b2bec3"
-}
+    primary: "#6c5ce7", // Main accent color
+    secondary: "#a29bfe", // Secondary accents
+    accent: "#fd79a8", // Highlight color
+    background: "rgba(26, 26, 46, 0.95)",
+    text: "#ffffff",
+    textSecondary: "#b2bec3",
+};
 ```
 
 ## 📝 File Structure
@@ -174,8 +165,7 @@ Config.Theme = {
 ```
 FiveM_Load/
 ├── fxmanifest.lua     # FiveM resource manifest
-├── config.lua         # Server configuration
-├── config.js          # Client configuration (JS)
+├── config.js          # Configuration (single source)
 ├── index.html         # Main HTML structure
 ├── style.css          # Styling and animations
 ├── script.js          # JavaScript functionality
@@ -222,7 +212,7 @@ FiveM_Load/
 - ✅ Restart the server after changes
 
 ### Configuration Not Updating
-- ✅ Remember to edit **both** `config.lua` and `config.js`
+- ✅ Edit `config.js` and ensure the resource reloaded
 - ✅ Clear your browser cache (F5 or Ctrl+Shift+R)
 - ✅ Restart the FiveM server
 
