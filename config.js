@@ -11,7 +11,7 @@ const Config = {
     BackgroundColor: "#1a1a2e",
     
     EnableMusic: true,
-    MusicURL: "https://www.youtube.com/embed/fq5dhsVXK_8?autoplay=1&loop=1&playlist=fq5dhsVXK_8&controls=0&showinfo=0",
+    MusicURL: "https://www.youtube.com/embed/z6aONWHhTCU?autoplay=1&loop=1&playlist=z6aONWHhTCU&controls=0&showinfo=0&modestbranding=1",
     MusicVolume: 0.3,
     
     Staff: [
