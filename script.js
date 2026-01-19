@@ -106,9 +106,20 @@ function initializeMusic() {
     hiddenIframe.style.height = '0';
     musicContainer.appendChild(hiddenIframe);
     
-    // Create visible media player
+    // Create visible media player with controls enabled
+    // Replace controls=0 with controls=1 if it exists, otherwise add it
+    let playerUrl = Config.MusicURL;
+    if (playerUrl.includes('controls=0')) {
+        playerUrl = playerUrl.replace('controls=0', 'controls=1');
+    } else if (playerUrl.includes('controls=1')) {
+        // Already has controls=1, use as is
+    } else {
+        // No controls parameter, add it
+        playerUrl = playerUrl + (playerUrl.includes('?') ? '&' : '?') + 'controls=1';
+    }
+    
     const playerIframe = document.createElement('iframe');
-    playerIframe.src = Config.MusicURL + (Config.MusicURL.includes('?') ? '&' : '?') + 'controls=1';
+    playerIframe.src = playerUrl;
     playerIframe.frameborder = '0';
     playerIframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     playerIframe.referrerPolicy = 'strict-origin-when-cross-origin';
