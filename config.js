@@ -11,8 +11,8 @@ const Config = {
     BackgroundColor: "#1a1a2e",
     
     EnableMusic: true,
-    // Full embed src for the selected YouTube track (autoplay + loop)
-    MusicURL: "https://www.youtube.com/embed/z6aONWHhTCU?si=zC1h6CTiaswlHd1m&controls=0&autoplay=1&loop=1&playlist=z6aONWHhTCU",
+    // Full embed src for the selected YouTube track (autoplay + loop) without extra tracking params
+    MusicURL: "https://www.youtube.com/embed/z6aONWHhTCU?autoplay=1&loop=1&playlist=z6aONWHhTCU&controls=0&modestbranding=1&rel=0&playsinline=1",
     MusicVolume: 0.3,
     
     Staff: [
