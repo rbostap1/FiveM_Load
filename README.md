@@ -1,6 +1,6 @@
 # FiveM Custom Loading Screen 🎮
 
-A modern, feature-rich, and fully customizable loading screen for your FiveM server. Impress your players with a beautiful loading experience featuring direct-audio playback, video backgrounds, staff display, social media integration, and server updates.
+A modern, feature-rich, and fully customizable loading screen for your FiveM server. The new layout ships a bold hero, glass cards, timeline announcements, and a progress bar wired to FiveM load events.
 
 ![FiveM](https://img.shields.io/badge/FiveM-Compatible-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -8,12 +8,13 @@ A modern, feature-rich, and fully customizable loading screen for your FiveM ser
 ## ✨ Features
 
 - 🎵 **Music Player** - Direct audio (mp3/ogg) with play/pause, mute, and volume controls
-- 🎬 **Dynamic Backgrounds** - Support for video, image, or solid color backgrounds
-- 👥 **Staff Display** - Showcase your server team with avatars and roles
-- 🔗 **Social Media Links** - Discord, X (Twitter), Instagram, TikTok integration
-- 📢 **Announcements** - Scrollable list with detailed popup modals
-- 📖 **Rules Link** - Direct link to your server rules page
-- 🎨 **Modern UI/UX** - Beautiful animations, gradients, and smooth transitions
+- 🎚️ **Live Progress** - Animated bar and status labels tied to FiveM `loadProgress`
+- 🎬 **Dynamic Backgrounds** - Support for video, image, or solid color backgrounds with grid-and-blob ambient layer
+- 👥 **Staff Display** - Responsive staff grid with avatars and roles
+- 🔗 **Social Media Links** - Compact pill links for Discord, X (Twitter), Instagram, TikTok, etc.
+- 📢 **Announcements** - Timeline-style list with detailed popup modals
+- 📖 **Rules Link** - Primary CTA in the hero
+- 🎨 **Modern UI/UX** - Space Grotesk type, glass cards, gradients, subtle glow
 - 📱 **Fully Responsive** - Works on all screen sizes
 - ⚙️ **100% Customizable** - Everything configurable via `config.js`
 - 🎭 **Theme Support** - Custom color schemes
@@ -21,13 +22,11 @@ A modern, feature-rich, and fully customizable loading screen for your FiveM ser
 ## 📸 Preview
 
 The loading screen features:
-- Animated floating server logo
-- Gradient text effects
-- Smooth loading bar animation
-- Interactive cards with hover effects
-- Glass morphism design elements
-- Custom scrollbars
-- Modal popups for detailed announcements
+- Hero with logo tile, animated gradient server name, and progress card
+- Grid-and-blob ambient background for depth
+- Smooth, labeled loading bar with glow
+- Timeline announcements and modal details
+- Glass cards, hover motion, and custom cursor accents
 
 ## 🚀 Installation
 
@@ -153,14 +152,18 @@ Config.Updates = [
 
 ```javascript
 Config.Theme = {
-    primary: "#6c5ce7", // Main accent color
-    secondary: "#a29bfe", // Secondary accents
-    accent: "#fd79a8", // Highlight color
-    background: "rgba(26, 26, 46, 0.95)",
-    text: "#ffffff",
-    textSecondary: "#b2bec3",
+    primary: "#0ea5e9",      // Main accent color
+    secondary: "#22d3ee",    // Secondary accent
+    accent: "#f97316",       // Highlight color
+    background: "rgba(12, 18, 30, 0.95)", // Card surface
+    text: "#e9edf5",         // Primary text
+    textSecondary: "#9fb0c8",// Muted text
 };
 ```
+
+Notes:
+- `background` maps to the glass card surface; `textSecondary` maps to muted copy in the new UI.
+- The ambient grid/blobs are built in; swap `BackgroundType` and related fields in `Config` to override imagery/video.
 
 ## 📝 File Structure
 

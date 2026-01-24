@@ -6,91 +6,96 @@
     <title>Loading Screen</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background -->
     <div id="background-container">
+        <div class="bg-grid"></div>
+        <div class="bg-blob blob-a"></div>
+        <div class="bg-blob blob-b"></div>
         <div id="background-overlay"></div>
     </div>
 
-    <!-- Music Player Container -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <button id="music-toggle" class="music-control" aria-label="Toggle music">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
     <div id="music-container"></div>
 
-    <!-- Media Player -->
     <div id="media-player" class="media-player">
         <div class="player-wrapper">
             <div id="player-display"></div>
             <div class="player-controls">
-                <button id="player-close" class="player-btn" title="Close">
+                <button id="player-close" class="player-btn" title="Close player">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <!-- Music Control Button -->
-    <button id="music-toggle" class="music-control">
-        <i class="fas fa-volume-up"></i>
-    </button>
-
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="logo-container">
-                <img id="server-logo" src="" alt="Server Logo">
-            </div>
-            <h1 id="server-name" class="server-name"></h1>
-            <div class="loading-bar-container">
-                <div class="loading-bar">
-                    <div class="loading-bar-fill"></div>
+    <div class="frame">
+        <header class="hero">
+            <div class="brand">
+                <div class="brand-logo">
+                    <img id="server-logo" src="" alt="Server logo">
                 </div>
-                <p class="loading-text">Loading<span class="dots"></span></p>
+                <div class="brand-copy">
+                    <p class="eyebrow">Now entering</p>
+                    <h1 id="server-name" class="server-name"></h1>
+                    <p class="lede">Syncing assets, spinning up the city, and making sure everything feels seamless.</p>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a id="rules-link" href="#" target="_blank" class="ghost-button">
+                    <i class="fas fa-book"></i>
+                    <span>Rules & Guidelines</span>
+                </a>
+
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <span>Loading session</span>
+                        <span id="progress-label">Booting</span>
+                    </div>
+                    <div class="loading-bar">
+                        <div class="loading-bar-fill" id="loading-progress-fill"></div>
+                    </div>
+                    <p class="loading-text">Stay put—your character and world are coming online.</p>
+                </div>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Left Column -->
-            <div class="column left-column">
-                <!-- Staff Section -->
-                <section class="card staff-card">
-                    <h2 class="card-title">
-                        <i class="fas fa-users"></i> Server Staff
-                    </h2>
-                    <div id="staff-list" class="staff-list"></div>
-                </section>
+        <main class="content-grid">
+            <section class="card updates-card">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">Announcements</p>
+                        <h2>Fresh off the devline</h2>
+                    </div>
+                    <div class="badge">Live</div>
+                </div>
+                <div id="updates-list" class="updates-list timeline"></div>
+            </section>
 
-                <!-- Social Media Links -->
-                <section class="card social-card">
-                    <h2 class="card-title">
-                        <i class="fas fa-share-nodes"></i> Connect With Us
-                    </h2>
-                    <div id="social-links" class="social-links"></div>
-                </section>
-            </div>
+            <section class="card staff-card">
+                <div class="card-heading">
+                    <p class="eyebrow">Crew</p>
+                    <h2>Meet your staff</h2>
+                </div>
+                <div id="staff-list" class="staff-list"></div>
+            </section>
 
-            <!-- Right Column -->
-            <div class="column right-column">
-                <!-- Updates Section -->
-                <section class="card updates-card">
-                    <h2 class="card-title">
-                        <i class="fas fa-bullhorn"></i> Announcements
-                    </h2>
-                    <div id="updates-list" class="updates-list"></div>
-                </section>
-
-                <!-- Rules Button -->
-                <a id="rules-link" href="#" target="_blank" class="rules-button">
-                    <i class="fas fa-book"></i> Server Rules
-                </a>
-            </div>
-        </div>
+            <section class="card social-card">
+                <div class="card-heading">
+                    <p class="eyebrow">Connect</p>
+                    <h2>Stay in the loop</h2>
+                </div>
+                <div id="social-links" class="social-links"></div>
+            </section>
+        </main>
     </div>
 
     <!-- Update Details Modal -->

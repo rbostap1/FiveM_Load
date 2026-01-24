@@ -25,6 +25,7 @@ function initializeLoadingScreen() {
     // Set server name and logo
     document.getElementById('server-name').textContent = Config.ServerName;
     document.getElementById('server-logo').src = Config.ServerLogo;
+    updateLoadingProgress(0.12, 'Booting');
     
     // Set background
     setBackground();
@@ -61,9 +62,12 @@ function applyTheme() {
         root.style.setProperty('--primary', Config.Theme.primary);
         root.style.setProperty('--secondary', Config.Theme.secondary);
         root.style.setProperty('--accent', Config.Theme.accent);
-        root.style.setProperty('--background', Config.Theme.background);
-        root.style.setProperty('--text', Config.Theme.text);
-        root.style.setProperty('--text-secondary', Config.Theme.textSecondary);
+        if (Config.Theme.background) {
+            root.style.setProperty('--surface', Config.Theme.background);
+            root.style.setProperty('--surface-strong', Config.Theme.background);
+        }
+        if (Config.Theme.text) root.style.setProperty('--text', Config.Theme.text);
+        if (Config.Theme.textSecondary) root.style.setProperty('--text-muted', Config.Theme.textSecondary);
     }
 }
 
@@ -287,10 +291,29 @@ function showUpdateDetails(update) {
 // Handle FiveM events
 window.addEventListener('message', function(event) {
     if (event.data.eventName === 'loadProgress') {
-        // You can update loading bar here if needed
-        console.log('Loading progress:', event.data.loadFraction);
+        updateLoadingProgress(event.data.loadFraction);
     }
 });
+
+function updateLoadingProgress(loadFraction, label) {
+    const fill = document.getElementById('loading-progress-fill');
+    const text = document.getElementById('progress-label');
+    if (!fill || !text) return;
+
+    const clamped = Math.max(0, Math.min(loadFraction ?? 0, 1));
+    const width = Math.max(8, clamped * 100);
+    fill.style.width = `${width}%`;
+
+    if (label) {
+        text.textContent = label;
+        return;
+    }
+
+    if (clamped >= 0.95) text.textContent = 'Finalizing';
+    else if (clamped >= 0.7) text.textContent = 'Streaming assets';
+    else if (clamped >= 0.4) text.textContent = 'Syncing world';
+    else text.textContent = `${Math.round(clamped * 100)}%`;
+}
 
 // Custom Cursor
 function initializeCustomCursor() {

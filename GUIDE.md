@@ -4,7 +4,7 @@ This guide shows how to add, remove, and update Announcements and Staff for your
 
 ## Announcements
 
-Announcements appear in the right column as a scrollable list. Clicking an announcement opens a modal with full details.
+Announcements appear in the main grid as a timeline-style list. Clicking an announcement opens a modal with full details.
 
 - Location: `Config.Updates` in [config.js](config.js)
 - Type: Array of objects
@@ -53,7 +53,7 @@ Config.Updates = [
 
 ## Staff Management
 
-Staff members appear in the left column as a vertical, scrollable list with the avatar on the left and name/role on the right.
+Staff members appear in the grid layout with avatar, name, and role.
 
 - Location: `Config.Staff` in [config.js](config.js)
 - Type: Array of objects
@@ -89,15 +89,17 @@ Config.Staff = [
 - Recommended avatar size ~80×80; square images display best.
 - Use stable, direct image URLs (CDN or server-hosted).
 - Order matters: staff are shown in the array’s order.
+- The grid auto-wraps; keep roles concise for clean cards.
 
 ## Quick Checklist
 
 - Edited [config.js](config.js) and saved changes
 - Reloaded the resource or server to apply updates
 - Verified announcements open in the modal and staff avatars render correctly
+- Checked the hero progress bar updates when FiveM sends `loadProgress`
 
 ## FAQ
 
 - Where is the config? All settings are in [config.js](config.js).
 - Can I use Markdown in `details`? Use HTML (e.g., `<ul>`, `<p>`, `<h3>`). Markdown is not parsed.
-- How do I change the section titles? Edit the header text in [index.html](index.html). The "Latest Updates" header was renamed to "Announcements".
+- How do I change section titles or hero copy? Edit the text in [index.html](index.html). The announcements header reads "Fresh off the devline" and the hero subtitle is editable.
