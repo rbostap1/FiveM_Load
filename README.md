@@ -34,7 +34,7 @@ The loading screen features:
 2. **Copy** the folder to your FiveM server's `resources` directory
 3. **Add** to your `server.cfg`:
    ```cfg
-   ensure FiveM_Load
+    ensure Fiveload
    ```
 4. **Customize** the configuration files (see below)
 5. **Restart** your server
@@ -168,7 +168,7 @@ Notes:
 ## 📝 File Structure
 
 ```
-FiveM_Load/
+Fiveload/
 ├── fxmanifest.lua     # FiveM resource manifest
 ├── config.js          # Configuration (single source)
 ├── index.html         # Main HTML structure
@@ -194,7 +194,7 @@ FiveM_Load/
 ### Loading Screen Not Appearing
 - ✅ Check server console for errors
 - ✅ Verify resource is in the `resources` folder
-- ✅ Ensure `ensure FiveM_Load` is in `server.cfg`
+- ✅ Ensure `ensure Fiveload` is in `server.cfg`
 - ✅ Restart the server after changes
 
 ### Configuration Not Updating
