@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'Your Name'
+author 'Ryan Bostaph'
 description 'Custom FiveM Loading Screen'
 version '1.0.0'
 
